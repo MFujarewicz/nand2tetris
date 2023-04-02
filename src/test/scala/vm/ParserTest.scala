@@ -59,14 +59,50 @@ class ParserTest extends AnyFlatSpec with Matchers {
 
     parser.advance();
     parser.commandType() shouldEqual PUSH
-    parser.arg1() shouldEqual CONSTANT
-    parser.arg2() shouldEqual 17
+    parser.memorySegment() shouldEqual CONSTANT
+    parser.memoryIndex() shouldEqual 17
 
     parser.advance()
     parser.commandType() shouldEqual POP
-    parser.arg1() shouldEqual LOCAL
-    parser.arg2() shouldEqual 891
+    parser.memorySegment() shouldEqual LOCAL
+    parser.memoryIndex() shouldEqual 891
 
+
+  }
+
+  "parser" should "have correct memory segment" in {
+
+    val vmCode =
+      """push argument 17
+        |pop local 891
+        |pop static 891
+        |pop constant 891
+        |pop this 891
+        |pop that 891
+        |pop pointer 891
+        |pop temp 891
+        |
+        |
+        |""".stripMargin.split("\n").toVector
+
+    val parser = new Parser(vmCode)
+
+    parser.advance();
+    parser.memorySegment() shouldEqual ARGUMENT
+    parser.advance();
+    parser.memorySegment() shouldEqual LOCAL
+    parser.advance();
+    parser.memorySegment() shouldEqual STATIC
+    parser.advance();
+    parser.memorySegment() shouldEqual CONSTANT
+    parser.advance();
+    parser.memorySegment() shouldEqual THIS
+    parser.advance();
+    parser.memorySegment() shouldEqual THAT
+    parser.advance();
+    parser.memorySegment() shouldEqual POINTER
+    parser.advance();
+    parser.memorySegment() shouldEqual TEMP
 
   }
 }

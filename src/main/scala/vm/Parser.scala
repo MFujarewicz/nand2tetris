@@ -7,8 +7,8 @@ import vm.SegmentType._
 class Parser(input: Vector[String]) {
 
   private var commandTypeOpt: Option[CommandType] = None
-  private var arg1Opt: Option[SegmentType] = None
-  private var arg2Opt: Option[Int] = None
+  private var memorySegmentOpt: Option[SegmentType] = None
+  private var memoryIndexOpt: Option[Int] = None
 
   var iterator: Iterator[String] = input.map(cleanLine).filter(_.nonEmpty).iterator
 
@@ -40,19 +40,19 @@ class Parser(input: Vector[String]) {
     command = iterator.next()
 
     commandTypeOpt = None
-    arg1Opt = None
-    arg2Opt = None
+    memorySegmentOpt = None
+    memoryIndexOpt = None
 
     command match {
       case s"push ${arg1} ${arg2}" => {
         commandTypeOpt = Some(PUSH)
-        arg1Opt = Some(SegmentType.valueOf(arg1.toUpperCase))
-        arg2Opt = Some(arg2.toInt)
+        memorySegmentOpt = Some(SegmentType.valueOf(arg1.toUpperCase))
+        memoryIndexOpt = Some(arg2.toInt)
       }
       case s"pop ${arg1} ${arg2}" => {
         commandTypeOpt = Some(POP)
-        arg1Opt = Some(SegmentType.valueOf(arg1.toUpperCase))
-        arg2Opt = Some(arg2.toInt)
+        memorySegmentOpt = Some(SegmentType.valueOf(arg1.toUpperCase))
+        memoryIndexOpt = Some(arg2.toInt)
       }
       case "add" => commandTypeOpt = Some(ARITHMETIC)
       case "sub" => commandTypeOpt = Some(ARITHMETIC)
@@ -70,12 +70,13 @@ class Parser(input: Vector[String]) {
     commandTypeOpt.get
   }
 
-  def arg1(): SegmentType = {
-    arg1Opt.get
+  def memorySegment(): SegmentType = {
+    memorySegmentOpt.get
   }
+  
 
-  def arg2(): Int = {
-    arg2Opt.get
+  def memoryIndex(): Int = {
+    memoryIndexOpt.get
   }
 }
 
