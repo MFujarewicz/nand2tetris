@@ -22,6 +22,10 @@ class CodeWriter(outputPath: String) {
 
 }
 
+object CodeWriter {
+  def apply(outputPath: String): CodeWriter = new CodeWriter(outputPath)
+}
+
 
 
 
