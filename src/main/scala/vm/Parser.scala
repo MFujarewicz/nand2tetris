@@ -6,9 +6,8 @@ import vm.SegmentType._
 
 class Parser(input: Vector[String]) {
 
-
   private var commandTypeOpt: Option[CommandType] = None
-  private var arg1Opt: Option[String] = None
+  private var arg1Opt: Option[SegmentType] = None
   private var arg2Opt: Option[Int] = None
 
   var iterator: Iterator[String] = input.map(cleanLine).filter(_.nonEmpty).iterator
@@ -47,12 +46,12 @@ class Parser(input: Vector[String]) {
     command match {
       case s"push ${arg1} ${arg2}" => {
         commandTypeOpt = Some(PUSH)
-        arg1Opt = Some(arg1)
+        arg1Opt = Some(SegmentType.valueOf(arg1.toUpperCase))
         arg2Opt = Some(arg2.toInt)
       }
       case s"pop ${arg1} ${arg2}" => {
         commandTypeOpt = Some(POP)
-        arg1Opt = Some(arg1)
+        arg1Opt = Some(SegmentType.valueOf(arg1.toUpperCase))
         arg2Opt = Some(arg2.toInt)
       }
       case "add" => commandTypeOpt = Some(ARITHMETIC)
@@ -66,20 +65,18 @@ class Parser(input: Vector[String]) {
       case "not" => commandTypeOpt = Some(ARITHMETIC)
     }
   }
-  
+
   def commandType(): CommandType = {
     commandTypeOpt.get
   }
 
-  def arg1(): String = {
+  def arg1(): SegmentType = {
     arg1Opt.get
   }
 
   def arg2(): Int = {
     arg2Opt.get
   }
-
-
 }
 
 

@@ -3,6 +3,7 @@ package vm
 import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should.Matchers
 import vm.CommandType._
+import vm.SegmentType._
 
 class ParserTest extends AnyFlatSpec with Matchers {
   "parser" should "return correct command type" in {
@@ -58,12 +59,12 @@ class ParserTest extends AnyFlatSpec with Matchers {
 
     parser.advance();
     parser.commandType() shouldEqual PUSH
-    parser.arg1() shouldEqual "constant"
+    parser.arg1() shouldEqual CONSTANT
     parser.arg2() shouldEqual 17
 
     parser.advance()
     parser.commandType() shouldEqual POP
-    parser.arg1() shouldEqual "local"
+    parser.arg1() shouldEqual LOCAL
     parser.arg2() shouldEqual 891
 
 

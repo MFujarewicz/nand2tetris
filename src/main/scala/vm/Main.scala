@@ -2,7 +2,6 @@ package vm
 
 import utils.FileLoader
 import vm.Parser
-import vm.SegmentTypes._
 import vm.SegmentType
 
 object Main extends App {
@@ -18,7 +17,9 @@ object Main extends App {
 
   println("elo")
 
-  "constant"
+  SegmentType.valueOf("ARGUMENT")
+
+  println(SegmentType.values.toList)
 
 
 
