@@ -2,7 +2,7 @@ package vm
 
 import org.scalatest.flatspec.AnyFlatSpec
 import org.scalatest.matchers.should.Matchers
-import vm.CommandTypes._
+import vm.CommandType._
 
 class ParserTest extends AnyFlatSpec with Matchers {
   "parser" should "return correct command type" in {

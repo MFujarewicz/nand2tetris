@@ -1,10 +1,11 @@
 package vm
 
-import vm.CommandTypes._
-import vm.CommandType
+import vm.CommandType._
+import vm.SegmentType._
 
 
 class Parser(input: Vector[String]) {
+
 
   private var commandTypeOpt: Option[CommandType] = None
   private var arg1Opt: Option[String] = None
@@ -65,7 +66,7 @@ class Parser(input: Vector[String]) {
       case "not" => commandTypeOpt = Some(ARITHMETIC)
     }
   }
-
+  
   def commandType(): CommandType = {
     commandTypeOpt.get
   }
