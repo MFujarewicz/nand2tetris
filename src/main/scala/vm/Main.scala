@@ -17,7 +17,7 @@ object Main extends App {
 
   println("elo")
 
-  SegmentType.valueOf("ARGUMENT")
+  SegmentType.withName("ARGUMENT")
 
   println(SegmentType.values.toList)
 

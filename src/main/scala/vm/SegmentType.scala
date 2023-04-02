@@ -1,6 +1,7 @@
 package vm
 
 
-enum SegmentType {
-  case ARGUMENT, LOCAL, STATIC, CONSTANT, THIS, THAT, POINTER, TEMP
+object SegmentType extends Enumeration {
+  type SegmentType = Value
+  val ARGUMENT, LOCAL, STATIC, CONSTANT, THIS, THAT, POINTER, TEMP = Value
 }

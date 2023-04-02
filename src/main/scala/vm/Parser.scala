@@ -46,12 +46,12 @@ class Parser(input: Vector[String]) {
     command match {
       case s"push ${arg1} ${arg2}" => {
         commandTypeOpt = Some(PUSH)
-        memorySegmentOpt = Some(SegmentType.valueOf(arg1.toUpperCase))
+        memorySegmentOpt = Some(SegmentType.withName(arg1.toUpperCase))
         memoryIndexOpt = Some(arg2.toInt)
       }
       case s"pop ${arg1} ${arg2}" => {
         commandTypeOpt = Some(POP)
-        memorySegmentOpt = Some(SegmentType.valueOf(arg1.toUpperCase))
+        memorySegmentOpt = Some(SegmentType.withName(arg1.toUpperCase))
         memoryIndexOpt = Some(arg2.toInt)
       }
       case "add" => commandTypeOpt = Some(ARITHMETIC)

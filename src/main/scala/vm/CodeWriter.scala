@@ -1,6 +1,6 @@
 package vm
 
-import assembler.CommnadTypes._
+import vm.CommandType.CommandType
 
 import java.io.{File, PrintWriter}
 import scala.collection.mutable
