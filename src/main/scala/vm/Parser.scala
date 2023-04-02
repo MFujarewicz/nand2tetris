@@ -73,7 +73,6 @@ class Parser(input: Vector[String]) {
   def memorySegment(): SegmentType = {
     memorySegmentOpt.get
   }
-  
 
   def memoryIndex(): Int = {
     memoryIndexOpt.get

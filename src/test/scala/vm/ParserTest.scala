@@ -52,8 +52,9 @@ class ParserTest extends AnyFlatSpec with Matchers {
 
   "parser" should "have correct command type and args in push and pop " in {
 
-    val vmCode = """push constant 17
-                   |pop local 891""".stripMargin.split("\n").toVector
+    val vmCode =
+      """push constant 17
+        |pop local 891""".stripMargin.split("\n").toVector
 
     val parser = new Parser(vmCode)
 
