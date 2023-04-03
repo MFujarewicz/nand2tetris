@@ -63,9 +63,34 @@ class CodeWriter(outputPath: String) {
       case vm.ArithmeticType.EQ => ???
       case vm.ArithmeticType.GT => ???
       case vm.ArithmeticType.LT => ???
-      case vm.ArithmeticType.AND => ???
-      case vm.ArithmeticType.OR => ???
-      case vm.ArithmeticType.NOT => ???
+      case vm.ArithmeticType.AND => {
+        writer.println(
+          """|@SP
+             |A=M-1
+             |D=M
+             |A=A-1
+             |M=D&M
+             |D=A
+             |@SP
+             |M=D+1""".stripMargin)
+      }
+      case vm.ArithmeticType.OR => {
+        writer.println(
+          """|@SP
+             |A=M-1
+             |D=M
+             |A=A-1
+             |M=D|M
+             |D=A
+             |@SP
+             |M=D+1""".stripMargin)
+      }
+      case vm.ArithmeticType.NOT => {
+        writer.println(
+          """|@SP
+             |A=M-1
+             |M=!M""".stripMargin)
+      }
     }
   }
 
