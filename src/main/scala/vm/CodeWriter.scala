@@ -9,6 +9,14 @@ import vm.SegmentType.{CONSTANT, SegmentType}
 
 class CodeWriter(outputPath: String) {
 
+  private var labelCount = 0;
+
+  def createUniqueLabel(): String = {
+    val label = s"__TranslatorLabel$labelCount"
+    labelCount += 1;
+    label
+  }
+
   private var currentFile: Option[String] = None
 
   val logger: Logger = Logger("codewriter")
@@ -60,7 +68,26 @@ class CodeWriter(outputPath: String) {
              |A=M-1
              |M=-M""".stripMargin)
       }
-      case vm.ArithmeticType.EQ => ???
+      case vm.ArithmeticType.EQ => {
+        val label = createUniqueLabel();
+
+        writer.println(
+          s"""|@SP
+             |A=M-1
+             |D=M
+             |A=A-1
+             |D=D-M
+             |M=-1
+             |@$label
+             |D;JEQ
+             |@SP
+             |A=M-1
+             |A=A-1
+             |M=0
+             |($label)
+             |@SP
+             |M=M-1""".stripMargin)
+      }
       case vm.ArithmeticType.GT => ???
       case vm.ArithmeticType.LT => ???
       case vm.ArithmeticType.AND => {

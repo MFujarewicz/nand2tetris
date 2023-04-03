@@ -12,8 +12,9 @@ object Main extends App {
   val myStackArithmetic = "vm_programs/MyPrograms/StackArithmetic.vm"
   val negTest = "vm_programs/MyPrograms/NegTest.vm"
   val or = "vm_programs/MyPrograms/Or.vm"
+  val eq = "vm_programs/MyPrograms/EqTest.vm"
 
-  val tr = Translator(or)
+  val tr = Translator(eq)
 
 }
 
