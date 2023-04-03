@@ -43,8 +43,23 @@ class CodeWriter(outputPath: String) {
              |@SP
              |M=D+1""".stripMargin)
       }
-      case vm.ArithmeticType.SUB => ???
-      case vm.ArithmeticType.NEG => ???
+      case vm.ArithmeticType.SUB => {
+        writer.println(
+          """|@SP
+             |A=M-1
+             |D=M
+             |A=A-1
+             |M=D-M
+             |D=A
+             |@SP
+             |M=D+1""".stripMargin)
+      }
+      case vm.ArithmeticType.NEG => {
+        writer.println(
+          """|@SP
+             |A=M-1
+             |M=-M""".stripMargin)
+      }
       case vm.ArithmeticType.EQ => ???
       case vm.ArithmeticType.GT => ???
       case vm.ArithmeticType.LT => ???

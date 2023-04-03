@@ -9,8 +9,10 @@ import java.io.File
 object Main extends App {
   val simpleAdd= "vm_programs/StackArithmetic/SimpleAdd"
   val stackTest= "vm_programs/StackArithmetic/SimpleAdd"
+  val myStackArithmetic= "vm_programs/MyPrograms/StackArithmetic.vm"
+  val negTest= "vm_programs/MyPrograms/NegTest.vm"
 
-  val tr = Translator(simpleAdd)
+  val tr = Translator(negTest)
 
 }
 

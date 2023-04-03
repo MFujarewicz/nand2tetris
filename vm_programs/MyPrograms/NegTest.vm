@@ -1,0 +1,4 @@
+push constant 7
+neg
+neg
+neg
