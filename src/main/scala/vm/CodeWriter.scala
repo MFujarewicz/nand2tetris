@@ -88,8 +88,46 @@ class CodeWriter(outputPath: String) {
              |@SP
              |M=M-1""".stripMargin)
       }
-      case vm.ArithmeticType.GT => ???
-      case vm.ArithmeticType.LT => ???
+      case vm.ArithmeticType.GT => {
+        val label = createUniqueLabel();
+
+        writer.println(
+          s"""|@SP
+              |A=M-1
+              |D=M
+              |A=A-1
+              |D=D-M
+              |M=0
+              |@$label
+              |D;JGE
+              |@SP
+              |A=M-1
+              |A=A-1
+              |M=-1
+              |($label)
+              |@SP
+              |M=M-1""".stripMargin)
+      }
+      case vm.ArithmeticType.LT => {
+        val label = createUniqueLabel();
+
+        writer.println(
+          s"""|@SP
+              |A=M-1
+              |D=M
+              |A=A-1
+              |D=D-M
+              |M=0
+              |@$label
+              |D;JLE
+              |@SP
+              |A=M-1
+              |A=A-1
+              |M=-1
+              |($label)
+              |@SP
+              |M=M-1""".stripMargin)
+      }
       case vm.ArithmeticType.AND => {
         writer.println(
           """|@SP
