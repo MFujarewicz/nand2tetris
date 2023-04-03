@@ -61,12 +61,12 @@ class ParserTest extends AnyFlatSpec with Matchers {
     parser.advance();
     parser.commandType() shouldEqual PUSH
     parser.memorySegment() shouldEqual CONSTANT
-    parser.memoryIndex() shouldEqual 17
+    parser.arg2() shouldEqual 17
 
     parser.advance()
     parser.commandType() shouldEqual POP
     parser.memorySegment() shouldEqual LOCAL
-    parser.memoryIndex() shouldEqual 891
+    parser.arg2() shouldEqual 891
 
 
   }

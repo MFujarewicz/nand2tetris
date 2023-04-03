@@ -8,7 +8,7 @@ class Parser(input: Vector[String]) {
 
   private var commandTypeOpt: Option[CommandType] = None
   private var memorySegmentOpt: Option[SegmentType] = None
-  private var memoryIndexOpt: Option[Int] = None
+  private var arg2Opt: Option[Int] = None
 
   var iterator: Iterator[String] = input.map(cleanLine).filter(_.nonEmpty).iterator
 
@@ -41,18 +41,18 @@ class Parser(input: Vector[String]) {
 
     commandTypeOpt = None
     memorySegmentOpt = None
-    memoryIndexOpt = None
+    arg2Opt = None
 
     command match {
       case s"push ${arg1} ${arg2}" => {
         commandTypeOpt = Some(PUSH)
         memorySegmentOpt = Some(SegmentType.withName(arg1.toUpperCase))
-        memoryIndexOpt = Some(arg2.toInt)
+        arg2Opt = Some(arg2.toInt)
       }
       case s"pop ${arg1} ${arg2}" => {
         commandTypeOpt = Some(POP)
         memorySegmentOpt = Some(SegmentType.withName(arg1.toUpperCase))
-        memoryIndexOpt = Some(arg2.toInt)
+        arg2Opt = Some(arg2.toInt)
       }
       case "add" => commandTypeOpt = Some(ARITHMETIC)
       case "sub" => commandTypeOpt = Some(ARITHMETIC)
@@ -74,9 +74,13 @@ class Parser(input: Vector[String]) {
     memorySegmentOpt.get
   }
 
-  def memoryIndex(): Int = {
-    memoryIndexOpt.get
+  def arg2(): Int = {
+    arg2Opt.get
   }
+}
+
+object Parser{
+  def apply(input: Vector[String]): Parser = new Parser(input)
 }
 
 
