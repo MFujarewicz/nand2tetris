@@ -1,7 +1,7 @@
 package vm
 
 import vm.CommandType._
-import vm.SegmentType._
+import vm.SegmentType
 
 
 class Parser(input: Vector[String]) {

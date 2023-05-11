@@ -5,7 +5,8 @@ import vm.CommandType.CommandType
 import java.io.{File, PrintWriter}
 import scala.collection.mutable
 import com.typesafe.scalalogging.Logger
-import vm.SegmentType.{CONSTANT, SegmentType}
+
+import vm.SegmentTypes._
 
 class CodeWriter(outputPath: String) {
 
@@ -73,20 +74,20 @@ class CodeWriter(outputPath: String) {
 
         writer.println(
           s"""|@SP
-             |A=M-1
-             |D=M
-             |A=A-1
-             |D=D-M
-             |M=-1
-             |@$label
-             |D;JEQ
-             |@SP
-             |A=M-1
-             |A=A-1
-             |M=0
-             |($label)
-             |@SP
-             |M=M-1""".stripMargin)
+              |A=M-1
+              |D=M
+              |A=A-1
+              |D=D-M
+              |M=-1
+              |@$label
+              |D;JEQ
+              |@SP
+              |A=M-1
+              |A=A-1
+              |M=0
+              |($label)
+              |@SP
+              |M=M-1""".stripMargin)
       }
       case vm.ArithmeticType.GT => {
         val label = createUniqueLabel();
@@ -177,8 +178,26 @@ class CodeWriter(outputPath: String) {
     }
   }
 
-  def writePop(segmentType: SegmentType, arg2: Int): Unit = {
-    ???
+  def writePop(segmentType: SegmentType, memoryOffset: Int): Unit = {
+    segmentType match {
+      case _ if List(LOCAL, ARGUMENT, THIS, THAT).contains(segmentType) => {
+        writer.println(
+          s"""|@${segmentType.asmShorthand.get}
+             |D=M
+             |@${memoryOffset}
+             |D=D+A
+             |@14
+             |M=D
+             |@SP
+             |M=M-1
+             |A=M
+             |D=M
+             |@14
+             |A=M
+             |M=D""".stripMargin
+        )
+      }
+    }
   }
 
   def writeProgramEndLoop() = {
