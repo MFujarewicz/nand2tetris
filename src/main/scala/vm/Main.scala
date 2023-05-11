@@ -17,8 +17,9 @@ object Main extends App {
   val lt = "vm_programs/MyPrograms/LtTest.vm"
 
   val popSegmentsTest = "vm_programs/MyPrograms/popSegments.vm"
+  val pushSegmentsTest = "vm_programs/MyPrograms/pushSegments.vm"
 
-  val tr = Translator(stackTest)
+  val tr = Translator(pushSegmentsTest)
 
 }
 

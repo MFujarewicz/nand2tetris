@@ -175,6 +175,20 @@ class CodeWriter(outputPath: String) {
         writer.println(s"@SP")
         writer.println(s"M=M+1")
       }
+      case _ if List(LOCAL, ARGUMENT, THIS, THAT).contains(segmentType) => {
+        val memoryOffset = arg2
+        writer.println(
+          s"""|@${segmentType.asmShorthand.get}
+              |D=M
+              |@${memoryOffset}
+              |A=D+A
+              |D=M
+              |@SP
+              |M=M+1
+              |A=M-1
+              |M=D""".stripMargin
+        )
+      }
     }
   }
 
@@ -183,18 +197,18 @@ class CodeWriter(outputPath: String) {
       case _ if List(LOCAL, ARGUMENT, THIS, THAT).contains(segmentType) => {
         writer.println(
           s"""|@${segmentType.asmShorthand.get}
-             |D=M
-             |@${memoryOffset}
-             |D=D+A
-             |@14
-             |M=D
-             |@SP
-             |M=M-1
-             |A=M
-             |D=M
-             |@14
-             |A=M
-             |M=D""".stripMargin
+              |D=M
+              |@${memoryOffset}
+              |D=D+A
+              |@14
+              |M=D
+              |@SP
+              |M=M-1
+              |A=M
+              |D=M
+              |@14
+              |A=M
+              |M=D""".stripMargin
         )
       }
     }
