@@ -244,7 +244,7 @@ class CodeWriter(outputPath: String) {
               |M=M-1
               |A=M
               |D=M
-              |@${arg2+5}
+              |@${arg2 + 5}
               |M=D""".stripMargin
         )
       }
