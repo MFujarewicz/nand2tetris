@@ -167,13 +167,15 @@ class CodeWriter(outputPath: String) {
   def writePush(segmentType: SegmentType, arg2: Int): Unit = {
     segmentType match {
       case CONSTANT => {
-        writer.println(s"@$arg2")
-        writer.println(s"D=A")
-        writer.println(s"@SP")
-        writer.println(s"A=M")
-        writer.println(s"M=D")
-        writer.println(s"@SP")
-        writer.println(s"M=M+1")
+        writer.println(
+          s"""|@${arg2}
+              |D=A
+              |@SP
+              |M=M+1
+              |A=M-1
+              |M=D""".stripMargin
+        )
+
       }
       case _ if List(LOCAL, ARGUMENT, THIS, THAT).contains(segmentType) => {
         val memoryOffset = arg2
