@@ -7,11 +7,20 @@ ThisBuild / organizationName := "fujarewicz"
 
 lazy val root = (project in file("."))
   .settings(
-    name := "nand2tetris")
+    name := "nand2tetris",
+    assembly / assemblyJarName := "VMTranslator.jar",
+    assembly / mainClass := Some("vm.Main"),
+    assembly / assemblyOutputPath := file(s"${(assembly/assemblyJarName).value}")
+  )
 
 libraryDependencies += scalaTest % Test
 libraryDependencies += "ch.qos.logback" % "logback-classic" % "1.4.6"
 libraryDependencies += "com.typesafe.scala-logging" %% "scala-logging" % "3.9.5"
 
 
-
+assembly / assemblyMergeStrategy := {
+  case x if x.endsWith("module-info.class") => MergeStrategy.discard
+  case x =>
+    val oldStrategy = (assembly / assemblyMergeStrategy).value
+    oldStrategy(x)
+}
