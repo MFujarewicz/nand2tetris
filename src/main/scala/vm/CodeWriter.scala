@@ -167,9 +167,9 @@ class CodeWriter(outputPath: String) {
   this done
   that done
   constant done
-  static - test
+  static done
   pointer
-  temp
+  temp done
 
 
    */
@@ -212,6 +212,16 @@ class CodeWriter(outputPath: String) {
               |M=D""".stripMargin
         )
       }
+      case TEMP => {
+        writer.println(
+          s"""|@${arg2 + 5}
+              |D=M
+              |@SP
+              |M=M+1
+              |A=M-1
+              |M=D""".stripMargin
+        )
+      }
     }
   }
 
@@ -242,6 +252,16 @@ class CodeWriter(outputPath: String) {
               |A=M
               |D=M
               |@${currentFile.get}.${arg2}
+              |M=D""".stripMargin
+        )
+      }
+      case TEMP => {
+        writer.println(
+          s"""|@SP
+              |M=M-1
+              |A=M
+              |D=M
+              |@${arg2+5}
               |M=D""".stripMargin
         )
       }
