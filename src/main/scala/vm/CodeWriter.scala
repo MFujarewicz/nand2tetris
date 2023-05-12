@@ -267,8 +267,7 @@ class CodeWriter(outputPath: String) {
               |A=M
               |D=M
               |@${thisThat}
-              |M=D
-              |""".stripMargin
+              |M=D""".stripMargin
         )
 
       }
