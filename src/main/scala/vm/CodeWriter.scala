@@ -205,6 +205,17 @@ class CodeWriter(outputPath: String) {
               |M=D""".stripMargin
         )
       }
+      case POINTER => {
+        val thisThat = if (arg2 == 0) "THIS" else "THAT"
+        writer.println(
+          s"""|@${thisThat}
+              |D=M
+              |@SP
+              |M=M+1
+              |A=M-1
+              |M=D""".stripMargin
+        )
+      }
     }
   }
 
@@ -247,6 +258,19 @@ class CodeWriter(outputPath: String) {
               |@${arg2 + 5}
               |M=D""".stripMargin
         )
+      }
+      case POINTER => {
+        val thisThat = if (arg2 == 0) "THIS" else "THAT"
+        writer.println(
+          s"""|@SP
+              |M=M-1
+              |A=M
+              |D=M
+              |@${thisThat}
+              |M=D
+              |""".stripMargin
+        )
+
       }
     }
   }
