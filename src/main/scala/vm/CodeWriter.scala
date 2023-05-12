@@ -160,9 +160,19 @@ class CodeWriter(outputPath: String) {
     }
   }
 
-  //  def writePushPop(command: CommandType, segment: SegmentType, index: Int): Unit = {
-  //
-  //  }
+
+  /*
+  local done
+  argument done
+  this done
+  that done
+  constant done
+  static - test
+  pointer
+  temp
+
+
+   */
 
   def writePush(segmentType: SegmentType, arg2: Int): Unit = {
     segmentType match {
@@ -191,12 +201,24 @@ class CodeWriter(outputPath: String) {
               |M=D""".stripMargin
         )
       }
+
+      case STATIC => {
+        writer.println(
+          s"""|@${currentFile.get}.${arg2}
+              |D=M
+              |@SP
+              |M=M+1
+              |A=M-1
+              |M=D""".stripMargin
+        )
+      }
     }
   }
 
-  def writePop(segmentType: SegmentType, memoryOffset: Int): Unit = {
+  def writePop(segmentType: SegmentType, arg2: Int): Unit = {
     segmentType match {
       case _ if List(LOCAL, ARGUMENT, THIS, THAT).contains(segmentType) => {
+        val memoryOffset = arg2
         writer.println(
           s"""|@${segmentType.asmShorthand.get}
               |D=M
@@ -210,6 +232,16 @@ class CodeWriter(outputPath: String) {
               |D=M
               |@14
               |A=M
+              |M=D""".stripMargin
+        )
+      }
+      case STATIC => {
+        writer.println(
+          s"""|@SP
+              |M=M-1
+              |A=M
+              |D=M
+              |@${currentFile.get}.${arg2}
               |M=D""".stripMargin
         )
       }
