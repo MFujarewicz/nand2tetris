@@ -157,19 +157,6 @@ class CodeWriter(outputPath: String) {
   }
 
 
-  /*
-  local done
-  argument done
-  this done
-  that done
-  constant done
-  static done
-  pointer
-  temp done
-
-
-   */
-
   def writePush(segmentType: SegmentType, arg2: Int): Unit = {
     segmentType match {
       case CONSTANT => {
