@@ -17,11 +17,12 @@ object Main extends App {
   val lt = "vm_programs/MyPrograms/LtTest.vm"
   val static = "vm_programs/MemoryAccess/StaticTest/StaticTest.vm"
   val basicTest = "vm_programs/MemoryAccess/BasicTest"
+  val pointerTest = "vm_programs/MemoryAccess/PointerTest"
 
   val popSegmentsTest = "vm_programs/MyPrograms/popSegments.vm"
   val pushSegmentsTest = "vm_programs/MyPrograms/pushSegments.vm"
 
-  val tr = Translator(basicTest)
+  val tr = Translator(pointerTest)
 
 }
 

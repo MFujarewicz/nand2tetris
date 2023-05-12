@@ -1,11 +1,7 @@
 package vm
 
-import vm.CommandType.CommandType
-
 import java.io.{File, PrintWriter}
-import scala.collection.mutable
 import com.typesafe.scalalogging.Logger
-
 import vm.SegmentTypes._
 
 class CodeWriter(outputPath: String) {
