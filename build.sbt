@@ -10,7 +10,7 @@ lazy val root = (project in file("."))
     name := "nand2tetris",
     assembly / assemblyJarName := "VMTranslator.jar",
     assembly / mainClass := Some("vm.Main"),
-    assembly / assemblyOutputPath := file(s"${(assembly/assemblyJarName).value}")
+    assembly / assemblyOutputPath := file(s"week7submission/${(assembly/assemblyJarName).value}")
   )
 
 libraryDependencies += scalaTest % Test

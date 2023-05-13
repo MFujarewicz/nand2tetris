@@ -13,7 +13,7 @@ object TestMain extends App {
   val negTest = "vm_programs/MyPrograms/NegTest.vm"
   val or = "vm_programs/MyPrograms/Or.vm"
   val eq = "vm_programs/MyPrograms/EqTest.vm"
-  val gt = "vm_programs/MyPrograms/GtTest.vm"
+  val gt = "vm_programs/MyPrograms/popSegments.vm"
   val lt = "vm_programs/MyPrograms/LtTest.vm"
   val static = "vm_programs/MemoryAccess/StaticTest/StaticTest.vm"
   val basicTest = "vm_programs/MemoryAccess/BasicTest"
